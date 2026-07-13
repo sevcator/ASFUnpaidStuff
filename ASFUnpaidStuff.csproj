@@ -1,0 +1,88 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<DebugSymbols>True</DebugSymbols>
+		<DebugType>pdbonly</DebugType>
+		<TargetFramework>$(TargetFramework)</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<!-- Compile-time only: satisfies the OpenApi source generator flowing in from the ASF project reference; ASF ships these assemblies at runtime -->
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" ExcludeAssets="runtime" PrivateAssets="all" />
+		<PackageReference Include="ConfigureAwaitChecker.Analyzer" PrivateAssets="all" />
+		<PackageReference Include="JetBrains.Annotations" PrivateAssets="all" />
+		<PackageReference Include="NLog" />
+		<PackageReference Include="System.Composition.AttributedModel" IncludeAssets="compile" />
+		<PackageReference Include="SteamKit2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj" Condition="Exists('ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj')" ExcludeAssets="all" Private="false" />
+		<PackageReference Include="ArchiSteamFarm" Condition="!Exists('ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj') And !Exists('..\ArchiSteamFarm.dll')" ExcludeAssets="runtime" PrivateAssets="all" />
+		<Reference Include="ArchiSteamFarm" Condition="!Exists('ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj') And Exists('..\ArchiSteamFarm.dll')" HintPath="..\ArchiSteamFarm.dll" Private="false" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include=".github\CODE_OF_CONDUCT.md">
+	    <Link>.github\CODE_OF_CONDUCT.md</Link>
+	  </Content>
+	  <Content Include=".github\CONTRIBUTING.md">
+	    <Link>.github\CONTRIBUTING.md</Link>
+	  </Content>
+	  <Content Include=".github\dependabot.yml">
+	    <Link>.github\dependabot.yml</Link>
+	  </Content>
+	  <Content Include=".github\FUNDING.yml">
+	    <Link>.github\FUNDING.yml</Link>
+	  </Content>
+	  <Content Include=".github\ISSUE_TEMPLATE\bug_report.md">
+	    <Link>.github\ISSUE_TEMPLATE\bug_report.md</Link>
+	  </Content>
+	  <Content Include=".github\ISSUE_TEMPLATE\feature_request.md">
+	    <Link>.github\ISSUE_TEMPLATE\feature_request.md</Link>
+	  </Content>
+	  <Content Include=".github\PULL_REQUEST_TEMPLATE.md">
+	    <Link>.github\PULL_REQUEST_TEMPLATE.md</Link>
+	  </Content>
+	  <Content Include=".github\RELEASE_TEMPLATE.md">
+	    <Link>.github\RELEASE_TEMPLATE.md</Link>
+	  </Content>
+	  <Content Include=".github\renovate.json5">
+	    <Link>.github\renovate.json5</Link>
+	  </Content>
+	  <Content Include=".github\SECURITY.md">
+	    <Link>.github\SECURITY.md</Link>
+	  </Content>
+	  <Content Include=".github\SUPPORT.md">
+	    <Link>.github\SUPPORT.md</Link>
+	  </Content>
+	  <Content Include=".github\workflows\bump-asf-reference.yml">
+	    <Link>.github\workflows\bump-asf-reference.yml</Link>
+	  </Content>
+	  <Content Include=".github\workflows\ci.yml">
+	    <Link>.github\workflows\ci.yml</Link>
+	  </Content>
+	  <Content Include=".github\workflows\keepalive.yml">
+	    <Link>.github\workflows\keepalive.yml</Link>
+	  </Content>
+	  <Content Include=".github\workflows\publish.yml">
+	    <Link>.github\workflows\publish.yml</Link>
+	  </Content>
+	  <Content Include=".github\workflows\test_integration.yml">
+	    <Link>.github\workflows\test_integration.yml</Link>
+	  </Content>
+	  <Content Include="Directory.Build.props" />
+	  <Content Include="Directory.Packages.props" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\redlib_instances.json" />
+	  <EmbeddedResource Include="Resources\redlib_instances.json" />
+	</ItemGroup>
+</Project>
